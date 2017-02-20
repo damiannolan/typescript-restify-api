@@ -1,0 +1,9 @@
+{
+  "Server": {
+    "name": "typescript-api",
+    "port": 9000
+  },
+  "Logger": {
+    "level": "trace"
+  }
+}

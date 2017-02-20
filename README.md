@@ -1,2 +1,3 @@
 # typescript-api
-Repo for backend 3rd year project
+
+Respository containing backend web api for 3rd year end of year project

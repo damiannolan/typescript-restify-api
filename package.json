@@ -1,0 +1,49 @@
+{
+  "name": "typescript-api",
+  "version": "0.0.0",
+  "description": "api",
+  "license": "MIT",
+  "repository": "https://github.com/damiannolan/typescript-api",
+  "author": "Damian Nolan",
+  "keywords": [
+    ""
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/server.js",
+  "typings": "lib/server.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*.spec.ts",
+    "watch": "concurrently -k \"npm run build -- --watch\" \"pm2-dev start ecosystem.config.js\"",
+    "watch:test": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.5",
+    "config": "^1.25.1",
+    "restify": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/bunyan": "0.0.35",
+    "@types/chai": "^3.0.0",
+    "@types/config": "0.0.31",
+    "@types/mocha": "^2.0.0",
+    "@types/node": "6.0.31",
+    "@types/restify": "^2.0.38",
+    "@types/supertest": "^2.0.0",
+    "chai": "^3.0.0",
+    "concurrently": "^3.1.0",
+    "mocha": "^3.0.0",
+    "rimraf": "^2.0.0",
+    "supertest": "^3.0.0",
+    "ts-node": "^1.0.0",
+    "tslint": "^4.0.0",
+    "typescript": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=6.3.0"
+  }
+}
