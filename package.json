@@ -14,11 +14,12 @@
   "main": "lib/server.js",
   "typings": "lib/server.d.ts",
   "scripts": {
+    "start": "node lib/server.js",
     "clean": "rimraf lib",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*.spec.ts",
-    "watch": "concurrently -k \"npm run build -- --watch\" \"pm2-dev start ecosystem.config.js\"",
+    "watch": "npm run clean && npm run build && concurrently -k \"npm run build -- --watch\" \"pm2-dev start ecosystem.config.js | bunyan\"",
     "watch:test": "npm run test -- --watch"
   },
   "dependencies": {
