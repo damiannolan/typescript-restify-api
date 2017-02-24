@@ -25,12 +25,17 @@
   "dependencies": {
     "bunyan": "^1.8.5",
     "config": "^1.25.1",
-    "restify": "^4.3.0"
+    "jsonwebtoken": "^7.2.1",
+    "passport-facebook": "^2.1.1",
+    "passport-restify": "^1.0.1",
+    "restify": "^4.3.0",
+    "restify-jwt": "^0.4.0"
   },
   "devDependencies": {
     "@types/bunyan": "0.0.35",
     "@types/chai": "^3.0.0",
     "@types/config": "0.0.31",
+    "@types/jsonwebtoken": "^7.2.0",
     "@types/mocha": "^2.0.0",
     "@types/node": "6.0.31",
     "@types/restify": "^2.0.38",

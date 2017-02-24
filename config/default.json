@@ -1,7 +1,10 @@
 {
   "Server": {
     "name": "typescript-api",
-    "port": 9000
+    "port": 9000,
+    "authSecret": "secret",
+    "corsHeaders": ["Origin", "Authorization"],
+    "corsOrigins": ["*"]
   },
   "Logger": {
     "level": "trace"
