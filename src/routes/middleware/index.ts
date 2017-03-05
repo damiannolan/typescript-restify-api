@@ -1,6 +1,5 @@
 import * as bunyan from 'bunyan';
 import * as config from 'config';
-import * as passport from 'passport-restify';
 import * as restify from 'restify';
 import * as jwt from 'restify-jwt';
 
@@ -16,8 +15,6 @@ export const bootstrap = (server: restify.Server) => {
     server.use(restify.acceptParser(server.acceptable));
     // Authorization parser necessary to take bearer token
     server.use(restify.authorizationParser());
-    // Passport middleware for facebook login
-    server.use(passport.initialize({ userProperty: 'userAccount' }));
     // Json web token for authorized routes
     //server.use(jwt(jwtConfig).unless(whitelistConfig));
     server.use(restify.bodyParser(bodyParserConfig));

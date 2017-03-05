@@ -1,21 +1,12 @@
 import * as config from 'config';
-import { Facebook, FacebookApiException } from 'fb';
-import * as passport from 'passport-restify';
 import * as restify from 'restify';
 import * as jwt from 'jsonwebtoken';
 import * as fb from 'fb';
+import { Facebook, FacebookApiException } from 'fb';
 
 import { logger as log } from '../../../logger';
 
-import { init as initPassportStrategy } from './passport-strategy';
-
 export const bootstrap = (server: restify.Server) => {
-
-  initPassportStrategy();
-
-  server.get('/auth/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email'] }));
-
-  //server.get('/auth/facebook/callback', [passportAuth, createAccount, issueTokenResponse]);
 
   server.get('/auth/facebook/callback', (req: restify.Request, res: restify.Response) => {
     log.info('got response', req.params);
@@ -23,7 +14,7 @@ export const bootstrap = (server: restify.Server) => {
     res.send(302);
   });
 
-  //post for exchange fb token for jwt
+  // post to exchange fb token for jwt
   server.post('/auth/facebook/token', fbVerify);
 }
 
