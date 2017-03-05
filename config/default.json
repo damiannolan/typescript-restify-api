@@ -8,5 +8,14 @@
   },
   "Logger": {
     "level": "trace"
+  },
+  "OAuthProviders": {
+    "Facebook": {
+      "apiVersion": "v2.8",
+      "client_id": "2224281814463029",
+      "client_secret": "7ad64a00b59474e2df1bb3b20382628e",
+      "redirect_uri": "http://localhost:3000/auth/facebook/callback",
+      "grant_type": "client_credentials"
+    }
   }
 }

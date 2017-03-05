@@ -19,7 +19,7 @@ export const bootstrap = (server: restify.Server) => {
     // Passport middleware for facebook login
     server.use(passport.initialize({ userProperty: 'userAccount' }));
     // Json web token for authorized routes
-    server.use(jwt(jwtConfig).unless(whitelistConfig));
+    //server.use(jwt(jwtConfig).unless(whitelistConfig));
     server.use(restify.bodyParser(bodyParserConfig));
 }
 

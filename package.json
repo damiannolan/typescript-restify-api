@@ -25,6 +25,7 @@
   "dependencies": {
     "bunyan": "^1.8.5",
     "config": "^1.25.1",
+    "fb": "^1.1.1",
     "jsonwebtoken": "^7.2.1",
     "passport-facebook": "^2.1.1",
     "passport-restify": "^1.0.1",
