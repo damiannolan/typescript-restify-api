@@ -16,9 +16,9 @@ export const bootstrap = (server: restify.Server) => {
     // Authorization parser necessary to take bearer token
     server.use(restify.authorizationParser());
     // Json web token for authorized routes
-    //server.use(jwt(jwtConfig).unless(whitelistConfig));
+    // server.use(jwt(jwtConfig).unless(whitelistConfig));
     server.use(restify.bodyParser(bodyParserConfig));
-}
+};
 
 const jwtConfig = { secret: config.get('Server.authSecret') };
 
@@ -26,8 +26,7 @@ const jwtConfig = { secret: config.get('Server.authSecret') };
 // Whitelist root /heathcheck
 // And regexp to not have to deal with each individual auth route separately (every route under /auth)
 const whitelistConfig = {
-  path: ['/', '/healthcheck', /(?:auth(?:$|\/\w*?))/i]
+  path: ['/', '/healthcheck', /(?:auth(?:$|\/\w*?))/i],
 };
 
 const bodyParserConfig = { mapParams: true };
-

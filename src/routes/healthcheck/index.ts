@@ -1,7 +1,7 @@
 import * as restify from 'restify';
 
 const healthcheck = (req: restify.Request, res: restify.Response, next: restify.Next) =>  {
-  res.json({message: "hello from api/healthcheck"});
+  res.json({message: 'hello from api/healthcheck'});
   res.send(200);
   return next();
 };
