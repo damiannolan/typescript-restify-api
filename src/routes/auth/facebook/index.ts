@@ -4,20 +4,25 @@ import { Facebook, FacebookApiException } from 'fb';
 import * as jwt from 'jsonwebtoken';
 import { logger as log } from '../../../logger';
 import * as restify from 'restify';
+import { UserProfileRequest } from '../../../model/user-profile-request';
+
+import { createUserIfNotExists } from '../../../db/neo4j/commands/create-user-if-not-exists';
 
 export const bootstrap = (server: restify.Server) => {
 
   server.get('/auth/facebook/callback', (req: restify.Request, res: restify.Response) => {
     log.info('Facebook Response: ', req.params);
+    
+    // !!! response doens't really matter as its going to the pop up browser window
     res.header('Location', 'http://localhost:4200/about');
     res.send(302);
   });
 
   // post to exchange fb token for jwt
-  server.post('/auth/facebook/token', fbVerify);
+  server.post('/auth/facebook/token', [fbVerify, createUser, issueToken]);
 };
 
-const fbVerify = (req: restify.Request, res: restify.Response, next: restify.Next): void => {
+const fbVerify = (req: UserProfileRequest, res: restify.Response, next: restify.Next): void => {
   log.trace('fbVerify', req.body);
 
   const fb = new Facebook({
@@ -26,7 +31,7 @@ const fbVerify = (req: restify.Request, res: restify.Response, next: restify.Nex
     version: config.get('OAuthProviders.Facebook.apiVersion'),
   });
 
-  fb.api('/me', {
+  fb.api('me', {
     access_token: req.body.accessToken,
     fields: ['first_name', 'last_name', 'email', 'gender', 'picture.type(large)'],
   }, (fbApiResp: any) => {
@@ -36,23 +41,41 @@ const fbVerify = (req: restify.Request, res: restify.Response, next: restify.Nex
       return res.send(503, { reason: 'Failed to access Facebook API' });
     }
 
-    // req.userProfile = UserProfile.fromFacebookProfile(fbApiResp as IFacebookProfile);
-    const payload = {
+    req.userProfile = {
       email: fbApiResp.email,
       firstName: fbApiResp.first_name,
       lastName: fbApiResp.last_name,
       pictureUrl: fbApiResp.picture.data.url,
+      id: fbApiResp.id
     };
+
+    next();
+    //createOrUpdateUser(fbApiResp);
+    // req.userProfile = UserProfile.fromFacebookProfile(fbApiResp as IFacebookProfile);
+    
+  });
+
+};
+
+const createUser = async (req: UserProfileRequest, res: restify.Response, next: restify.Next) => {
+    try {
+      const userProfile = await createUserIfNotExists(req.userProfile);
+      next();
+    } catch(err) {
+      log.error('Create User Failed', err);
+    }
+};
+
+const issueToken = (req: UserProfileRequest, res: restify.Response, next: restify.Next) => {
+    const payload = req.userProfile;
 
     const secret = config.get('Server.authSecret') as string;
 
     const tokenResponse = {
-      accessToken: jwt.sign(payload, secret, { subject: fbApiResp.id }),
+      accessToken: jwt.sign(payload, secret, { subject: req.userProfile.id }),
       expiresIn: 9600,
       tokenType: 'Bearer',
     };
 
     res.send(200, tokenResponse);
-  });
-
 };
