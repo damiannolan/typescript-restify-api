@@ -1,7 +1,7 @@
 import * as restify from 'restify';
 
 const catagories = (req: restify.Request, res: restify.Response, next: restify.Next) =>  {
-  res.json(['Guitar', 'Drums', 'Bass', 'DJ and Audio Production']);
+  res.json(['Guitar', 'Drums', 'Bass', 'DJ and Audio Production', 'Other']);
   res.send(200);
   return next();
 };

@@ -74,8 +74,6 @@ const issueToken = (req: UserProfileRequest, res: restify.Response, next: restif
 
     const secret = config.get('Server.authSecret') as string;
 
-    //const buff = new Buffer(payload.pictureUrl);
-
     //payload.pictureUrl = URLSafeBase64.encode(buff);
     //payload.pictureUrl = base64.encode(utf8.encode(payload.pictureUrl));
     payload.pictureUrl = base64.encode(payload.pictureUrl);
