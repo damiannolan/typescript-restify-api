@@ -5,6 +5,9 @@ import * as jwt from 'jsonwebtoken';
 import { logger as log } from '../../../logger';
 import * as restify from 'restify';
 import { UserProfileRequest } from '../../../model/user-profile-request';
+import * as URLSafeBase64  from 'urlsafe-base64';
+import * as base64 from 'base-64';
+import * as utf8 from 'utf8';
 
 import { createUserIfNotExists } from '../../../db/neo4j/commands/create-user-if-not-exists';
 
@@ -70,6 +73,12 @@ const issueToken = (req: UserProfileRequest, res: restify.Response, next: restif
     const payload = req.userProfile;
 
     const secret = config.get('Server.authSecret') as string;
+
+    //const buff = new Buffer(payload.pictureUrl);
+
+    //payload.pictureUrl = URLSafeBase64.encode(buff);
+    //payload.pictureUrl = base64.encode(utf8.encode(payload.pictureUrl));
+    payload.pictureUrl = base64.encode(payload.pictureUrl);
 
     const tokenResponse = {
       accessToken: jwt.sign(payload, secret, { subject: req.userProfile.id }),

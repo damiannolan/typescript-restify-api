@@ -23,15 +23,18 @@
     "watch:test": "npm run test -- --watch"
   },
   "dependencies": {
+    "base-64": "^0.1.0",
     "bunyan": "^1.8.5",
     "config": "^1.25.1",
     "fb": "^1.1.1",
     "jsonwebtoken": "^7.2.1",
     "neo4j-driver": "^1.1.0",
     "restify": "^4.3.0",
-    "restify-jwt": "^0.4.0"
+    "restify-jwt": "^0.4.0",
+    "utf8": "^2.1.2"
   },
   "devDependencies": {
+    "@types/base-64": "^0.1.2",
     "@types/bunyan": "0.0.35",
     "@types/chai": "^3.0.0",
     "@types/config": "0.0.31",
@@ -40,6 +43,7 @@
     "@types/node": "6.0.31",
     "@types/restify": "^2.0.38",
     "@types/supertest": "^2.0.0",
+    "@types/utf8": "^2.1.5",
     "chai": "^3.0.0",
     "concurrently": "^3.1.0",
     "mocha": "^3.0.0",

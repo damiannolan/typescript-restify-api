@@ -16,7 +16,7 @@ export const bootstrap = (server: restify.Server) => {
     // Authorization parser necessary to take bearer token
     server.use(restify.authorizationParser());
     // Json web token for authorized routes
-    // server.use(jwt(jwtConfig).unless(whitelistConfig));
+    server.use(jwt(jwtConfig).unless(whitelistConfig));
     server.use(restify.bodyParser(bodyParserConfig));
 };
 
