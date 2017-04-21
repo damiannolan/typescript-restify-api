@@ -8,6 +8,8 @@ export const bootstrap = (server: restify.Server) => {
     const corsOrigins = config.get('Server.corsOrigins') as string[];
 
     // CORS for Cross Domain Requests
+    //Quick hack to allow Angular App to pass the OPTIONS request https://github.com/restify/node-restify/issues/664
+    restify.CORS.ALLOW_HEADERS.push('authorization');
     server.pre(restify.CORS({ headers: corsHeaders, origins: corsOrigins, credentials: true }));
     server.use(restify.fullResponse());
     server.use(restify.queryParser());

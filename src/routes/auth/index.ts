@@ -6,4 +6,6 @@ import * as restify from 'restify';
 
 export const bootstrap = (server: restify.Server) : void => {
   bootstrapFacebook(server);
+
+  log.debug('restify.CORS.ALLOW_HEADERS', restify.CORS.ALLOW_HEADERS);
 };
