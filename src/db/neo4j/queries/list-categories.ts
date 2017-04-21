@@ -7,7 +7,7 @@ export const getListCategories = (): Promise<string[]> => {
         // Create a new session using the driver
         const session = driver.session();
 
-        // Use session.run() to attempt to match an existing user
+        // Use session.run() to match categories
         session
             .run('MATCH (c:Category) RETURN c.name as category')
             .then((result: any) => {
@@ -18,13 +18,12 @@ export const getListCategories = (): Promise<string[]> => {
                 categories = [];
                 
                 result.records.forEach((record:any) => {                    
-                    //log.debug(record.get('category'));
                     let category = record.get('category');
-                    log.debug(category);
+                    // log.debug(category);
                     categories.push(category);
                 });
 
-                // resolve the promise using the userProfile
+                // resolve the promise with categories
                 resolve(categories);
             })
             .catch((error: any) => { // catch error and log
