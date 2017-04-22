@@ -17,8 +17,8 @@ const getAllArticles = async (req: restify.Request, res: restify.Response) => {
         log.debug('GET ALL ARTICLES HIT');
         const articles = await getArticlesList();
 
-        res.json(articles);
-        res.send(200);
+        //res.json(articles);
+        res.send(200, articles);
     } catch (err) {
         log.error('getAllArticles ', err);
     }

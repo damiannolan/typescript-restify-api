@@ -15,11 +15,11 @@ export const getListCategories = (): Promise<string[]> => {
                 log.debug('match returned', result);
 
                 let categories : string[] = [];
-                //categories = [];
                 
                 result.records.forEach((record:any) => {                    
+                    // Retrieve category based on 'category' field key
                     let category = record.get('category');
-                    // log.debug(category);
+                    // Push to categories array
                     categories.push(category);
                 });
 

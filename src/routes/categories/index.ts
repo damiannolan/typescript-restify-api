@@ -7,8 +7,8 @@ const categories = async (req: restify.Request, res: restify.Response) => {
   try {
     const categories = await getListCategories();
 
-    res.json(categories);
-    res.send(200);
+    //res.json(categories);
+    res.send(200,categories);
 
   } catch (err) {
     log.error('/categories - ', err);
