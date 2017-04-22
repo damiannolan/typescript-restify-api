@@ -14,8 +14,8 @@ export const getListCategories = (): Promise<string[]> => {
                 // log the result
                 log.debug('match returned', result);
 
-                let categories : string[];
-                categories = [];
+                let categories : string[] = [];
+                //categories = [];
                 
                 result.records.forEach((record:any) => {                    
                     let category = record.get('category');
