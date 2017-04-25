@@ -6,7 +6,7 @@ This repository contains the back-end submission of a 3rd year final year projec
 
 The server runs using Node.js and is written in Typescript using Restify. Restify borrows heavily from [Express](https://expressjs.com/) however does not provide the ability of server template files.
 
-Development workflow is managed using npm scripts. The Typescript source is contained in the src directory and transpiled to lib - where PM2 is used as a process manager to allow live reloading of the server if changes and made and saved. The script will clean the lib directory where the server is running, rebuild the files using the Typescript compiler and restart the server - making for a smooth development workflow without having to manually restart the server when changes have been made.
+Development workflow is managed using npm scripts. The Typescript source is contained in the src directory and transpiled to lib - where [PM2-dev](http://pm2.keymetrics.io/docs/usage/pm2-development/) is used as a process manager to allow live reloading of the server if changes and made and saved. The script will clean the lib directory where the server is running, rebuild the files using the Typescript compiler and restart the server - making for a smooth development workflow without having to manually restart the server when changes have been made.
 
 Neo4j is used the current database for the server and can be installed by following the simple instructions in the link provided below.
 
