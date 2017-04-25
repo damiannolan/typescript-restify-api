@@ -8,6 +8,10 @@ The server runs using Node.js and is written in Typescript using Restify. Restif
 
 Development workflow is managed using npm scripts. The Typescript source is contained in the src directory and transpiled to lib - where PM2 is used as a process manager to allow live reloading of the server if changes and made and saved. The script will clean the lib directory where the server is running, rebuild the files using the Typescript compiler and restart the server - making for a smooth development workflow without having to manually restart the server when changes have been made.
 
+Neo4j is used the current database for the server and can be installed by following the simple instructions in the link provided below.
+
+A detailed design document is contained in the front-end respository which consumes this API and can be found [HERE!](https://github.com/damiannolan/angular2-webapp/tree/master/design)
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
@@ -16,7 +20,7 @@ Development workflow is managed using npm scripts. The Typescript source is cont
 ## Quickstart
 
     npm install -g pm2@latest bunyan
-    
+
     npm install
 
     npm run watch
