@@ -19,6 +19,9 @@ A detailed design document is contained in the front-end respository which consu
 
 ## Quickstart
 
+A sample database has been provided to use with Neo4j. Simply unzip the file named restify-db and launch it using Neo4j.
+The password for the sample database provided is: password.
+
     npm install -g pm2@latest bunyan
 
     npm install
